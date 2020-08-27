@@ -4,9 +4,16 @@ declare(strict_types=1);
 namespace Falgun\Validation;
 
 use Closure;
-use Falgun\Validation\Rules\Max;
-use Falgun\Validation\Rules\Min;
+use Falgun\Validation\Rules\Ip;
+use Falgun\Validation\Rules\Url;
+use Falgun\Validation\Rules\Email;
+use Falgun\Validation\Rules\IsArray;
+use Falgun\Validation\Rules\AlphaNum;
+use Falgun\Validation\Rules\AlphaNumWords;
+use Falgun\Validation\Rules\MaxLen;
+use Falgun\Validation\Rules\MinLen;
 use Falgun\Validation\Rules\Custom;
+use Falgun\Validation\Rules\Numeric;
 use Falgun\Validation\Rules\Required;
 use Falgun\Validation\Rules\RuleInterface;
 
@@ -14,6 +21,7 @@ class Item
 {
 
     protected string $key;
+    protected string $label;
     protected array $rules;
     protected bool $isOptional;
 
@@ -22,6 +30,18 @@ class Item
         $this->key = $key;
         $this->rules = [];
         $this->isOptional = true;
+        $this->label($key);
+    }
+
+    public function label(string $label): self
+    {
+        $this->label = $this->prepareLabel($label);
+        return $this;
+    }
+
+    protected function prepareLabel($label)
+    {
+        return ucwords(str_replace(['-', '_'], ' ', $label));
     }
 
     public function required(): self
@@ -33,16 +53,65 @@ class Item
         return $this;
     }
 
-    public function min(int $min): self
+    public function minLen(int $min): self
     {
-        $this->rules[] = new Min($min);
+        $this->rules[] = new MinLen($min);
 
         return $this;
     }
 
-    public function max(int $limit): self
+    public function maxLen(int $limit): self
     {
-        $this->rules[] = new Max($limit);
+        $this->rules[] = new MaxLen($limit);
+
+        return $this;
+    }
+
+    public function numeric(): self
+    {
+        $this->rules[] = new Numeric();
+
+        return $this;
+    }
+
+    public function email(): self
+    {
+        $this->rules[] = new Email();
+
+        return $this;
+    }
+
+    public function url(): self
+    {
+        $this->rules[] = new Url();
+
+        return $this;
+    }
+
+    public function ip(): self
+    {
+        $this->rules[] = new Ip();
+
+        return $this;
+    }
+
+    public function alphaNum(): self
+    {
+        $this->rules[] = new AlphaNum();
+
+        return $this;
+    }
+
+    public function alphaNumWords(): self
+    {
+        $this->rules[] = new AlphaNumWords();
+
+        return $this;
+    }
+
+    public function isArray(): self
+    {
+        $this->rules[] = new IsArray();
 
         return $this;
     }
@@ -56,7 +125,7 @@ class Item
 
     public function validate($value, ErrorBag $errorBag, ErrorFormatBag $errorFormats): bool
     {
-        
+
         if ($value === null && $this->isOptional === true) {
             return true;
         }
@@ -82,7 +151,7 @@ class Item
             $format = $rule->getErrorMessage();
         }
 
-        $error = \sprintf($format, $this->key);
+        $error = \sprintf($format, $this->label);
 
         $errorBag->set($this->key, $ruleName, $error);
     }

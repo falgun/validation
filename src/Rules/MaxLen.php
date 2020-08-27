@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class Max implements RuleInterface
+class MaxLen implements RuleInterface
 {
 
     const NAME = 'Max';
@@ -17,6 +17,10 @@ class Max implements RuleInterface
 
     public function validate($value): bool
     {
+        if ($value === null) {
+            return false;
+        }
+
         return strlen($value) <= $this->limit;
     }
 

@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class Min implements RuleInterface
+class MinLen implements RuleInterface
 {
 
-    const NAME = 'Max';
+    const NAME = 'Min';
 
     protected int $min;
 
@@ -17,6 +17,10 @@ class Min implements RuleInterface
 
     public function validate($value): bool
     {
+        if ($value === null) {
+            return false;
+        }
+
         return strlen($value) >= $this->min;
     }
 
