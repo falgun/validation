@@ -39,7 +39,7 @@ class Item
         return $this;
     }
 
-    protected function prepareLabel($label)
+    protected function prepareLabel(string $label): string
     {
         return ucwords(str_replace(['-', '_'], ' ', $label));
     }
@@ -116,6 +116,17 @@ class Item
         return $this;
     }
 
+    public function matchWith(Item $item): self
+    {
+        $rule = new Rules\MatchWith($this->label);
+
+        // same rule will be called twice
+        $item->setRule($rule);
+        $this->setRule($rule);
+
+        return $this;
+    }
+
     public function custom(string $name, Closure $customRule): self
     {
         $this->rules[] = new Custom($name, $customRule);
@@ -154,5 +165,10 @@ class Item
         $error = \sprintf($format, $this->label);
 
         $errorBag->set($this->key, $ruleName, $error);
+    }
+
+    public function setRule(RuleInterface $rule): void
+    {
+        $this->rules[] = $rule;
     }
 }

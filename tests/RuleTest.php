@@ -181,18 +181,18 @@ class RuleTest extends TestCase
         $this->performTest($validation, $failData, $failError, $successData);
     }
 
-//    public function testMatchWith()
-//    {
-//        $validation = new Validator();
-//
-//        $validation->select('name')->matchWith($validation->select('alias'));
-//
-//        $failData = ['name' => 'john', 'alias' => 'chris'];
-//        $failError = ['name' => ['IsArray' => 'Name should match with %s !']];
-//        $successData = ['name' => 'john', 'alias' => 'john'];
-//
-//        $this->performTest($validation, $failData, $failError, $successData);
-//    }
+    public function testMatchWith()
+    {
+        $validation = new Validator();
+
+        $validation->select('name')->matchWith($validation->select('alias'));
+//        print_r($validation);die;
+        $failData = ['name' => 'john', 'alias' => 'chris'];
+        $failError = ['alias' => ['MatchWith' => 'Alias should contain same value as Name!']];
+        $successData = ['name' => 'john', 'alias' => 'john'];
+
+        $this->performTest($validation, $failData, $failError, $successData);
+    }
 
     protected function performTest(\Falgun\Validation\Validator $validation, array $failData, array $failError, array $successData)
     {
