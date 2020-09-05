@@ -4,20 +4,12 @@ declare(strict_types=1);
 namespace Falgun\Validation;
 
 use Closure;
-use Falgun\Validation\Rules\Ip;
-use Falgun\Validation\Rules\Url;
-use Falgun\Validation\Rules\Email;
-use Falgun\Validation\Rules\IsArray;
-use Falgun\Validation\Rules\AlphaNum;
-use Falgun\Validation\Rules\AlphaNumWords;
-use Falgun\Validation\Rules\MaxLen;
-use Falgun\Validation\Rules\MinLen;
+use Falgun\Validation\ErrorBag;
 use Falgun\Validation\Rules\Custom;
-use Falgun\Validation\Rules\Numeric;
-use Falgun\Validation\Rules\Required;
+use Falgun\Validation\ErrorFormatBag;
 use Falgun\Validation\Rules\RuleInterface;
 
-class Item implements ItemInterface
+class FileItem implements ItemInterface
 {
 
     protected string $key;
@@ -48,81 +40,28 @@ class Item implements ItemInterface
     {
         $this->isOptional = false;
 
-        $this->rules[] = new Required();
+        $this->rules[] = new Rules\RequiredFile();
 
         return $this;
     }
 
-    public function minLen(int $min): self
+    public function isImage(): self
     {
-        $this->rules[] = new MinLen($min);
+        $this->rules[] = new Rules\IsImage();
 
         return $this;
     }
 
-    public function maxLen(int $limit): self
+    public function multipleFile(): self
     {
-        $this->rules[] = new MaxLen($limit);
+        $this->rules[] = new Rules\MultipleFile();
 
         return $this;
     }
 
-    public function numeric(): self
+    public function maxSize(int $maxSize): self
     {
-        $this->rules[] = new Numeric();
-
-        return $this;
-    }
-
-    public function email(): self
-    {
-        $this->rules[] = new Email();
-
-        return $this;
-    }
-
-    public function url(): self
-    {
-        $this->rules[] = new Url();
-
-        return $this;
-    }
-
-    public function ip(): self
-    {
-        $this->rules[] = new Ip();
-
-        return $this;
-    }
-
-    public function alphaNum(): self
-    {
-        $this->rules[] = new AlphaNum();
-
-        return $this;
-    }
-
-    public function alphaNumWords(): self
-    {
-        $this->rules[] = new AlphaNumWords();
-
-        return $this;
-    }
-
-    public function isArray(): self
-    {
-        $this->rules[] = new IsArray();
-
-        return $this;
-    }
-
-    public function matchWith(Item $item): self
-    {
-        $rule = new Rules\MatchWith($this->label);
-
-        // same rule will be called twice
-        $item->setRule($rule);
-        $this->setRule($rule);
+        $this->rules[] = new Rules\MaxFileSize($maxSize);
 
         return $this;
     }

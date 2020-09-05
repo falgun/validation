@@ -9,6 +9,7 @@ class Validator
 {
 
     protected array $items;
+    protected array $fileItems;
     protected ErrorBag $errorBag;
     protected ErrorFormatBag $errorFormats;
     protected NotificationInterface $notification;
@@ -16,6 +17,7 @@ class Validator
     public function __construct(NotificationInterface $notification = null, $errorFormats = null)
     {
         $this->items = [];
+        $this->fileItems = [];
 
         if ($errorFormats === null) {
             $errorFormats = new ErrorFormatBag();
@@ -33,13 +35,32 @@ class Validator
         return $this->items[$name] = new Item($name);
     }
 
-    public function validate(array $values): bool
+    public function file(string $name): FileItem
+    {
+        return $this->fileItems[$name] = new FileItem($name);
+    }
+
+    public function validate(array $postDatas, array $files = []): bool
     {
         $this->errorBag = new ErrorBag();
 
+        $postItemsPassed = $this->validateItems($this->items, $postDatas);
+        $fileItemsPassed = $this->validateItems($this->fileItems, $files);
+
+        $isAllItemsPassed = $postItemsPassed && $fileItemsPassed;
+
+        if ($isAllItemsPassed === false && isset($this->notification)) {
+            $this->setToNofication($this->errorBag);
+        }
+
+        return $isAllItemsPassed;
+    }
+
+    private function validateItems(array $items, array $values): bool
+    {
         $isPassed = true;
 
-        foreach ($this->items as $name => $item) {
+        foreach ($items as $name => $item) {
             $isPassed &= $item->validate(
                 $values[$name] ?? null,
                 $this->errorBag,
@@ -48,10 +69,6 @@ class Validator
         }
 
         $isAllRulePassed = ($isPassed & true) === 1;
-
-        if ($isAllRulePassed === false && isset($this->notification)) {
-            $this->setToNofication($this->errorBag);
-        }
 
         return $isAllRulePassed;
     }
