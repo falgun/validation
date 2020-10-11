@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation;
 
-class ErrorFormatBag implements \IteratorAggregate
+class ErrorFormatBag
 {
 
     protected array $errorFormats;
@@ -11,11 +11,6 @@ class ErrorFormatBag implements \IteratorAggregate
     public function __construct(array $formats = [])
     {
         $this->errorFormats = $formats;
-    }
-
-    public function getIterator(): \Traversable
-    {
-        return new \ArrayIterator($this->errorFormats);
     }
 
     public function get(string $key): string

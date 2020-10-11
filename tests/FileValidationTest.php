@@ -51,6 +51,20 @@ class FileValidationTest extends TestCase
         $this->assertEquals([], $validation->errors()->all(), 'File validation return errors');
     }
 
+    public function testOptionalFileValidation()
+    {
+
+        $validation = new Validator();
+
+        $validation->file('file_1')->isImage();
+
+        $isValid = $validation->validate([], []);
+
+        $this->assertTrue($isValid, 'Optional File Validation Failed');
+
+        $this->assertEquals([], $validation->errors()->all(), 'Optional File validation return errors');
+    }
+
     public function testImageFileValidation()
     {
         $files = [

@@ -34,28 +34,6 @@ class ValidationTest extends TestCase
         $this->assertEmpty($validation->errors()->all());
     }
 
-    public function testErrorArray()
-    {
-        $validation = new Validator();
-
-        $validation->select('name')->required()->minLen(1)->maxLen(10);
-
-        $valid = $validation->validate([]);
-
-        $this->assertFalse($valid);
-
-        $this->assertEquals(
-            $validation->errors()->all(),
-            [
-                'name' => [
-                    'Required' => 'Name is required!',
-                    'Min' => 'Name should be more than 1 characters !',
-                    'Max' => 'Name should be less than 10 characters !',
-                ]
-            ]
-        );
-    }
-
 //    public function testErrorNotification()
 //    {
 //        $notification = new Notification();
@@ -94,5 +72,18 @@ class ValidationTest extends TestCase
                 'category' => ['Required' => 'Cat Gory is required!'],
             ]
         );
+    }
+
+    public function testOptionalValidation()
+    {
+        $validation = new Validator();
+
+        $validation->select('name')->alphaNum();
+
+        $isValid = $validation->validate([], []);
+
+        $this->assertTrue($isValid, 'Optional Validation Failed');
+
+        $this->assertEquals([], $validation->errors()->all(), 'Optional validation return errors');
     }
 }
