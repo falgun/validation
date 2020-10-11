@@ -63,7 +63,7 @@ class FileValidationTest extends TestCase
 
         $this->assertEquals([], $validation->errors()->all(), 'Optional File validation return errors');
     }
-    
+
     public function testNonExistentFileValidation()
     {
         $validation = new Validator();
@@ -242,5 +242,31 @@ class FileValidationTest extends TestCase
             ],
             $validation->errors()->all(),
             'File Size Fail validation return errors');
+    }
+
+    public function testLabel()
+    {
+        $validation = new Validator();
+
+        $validation->file('name')->required();
+        $validation->file('main_title')->required();
+        $validation->file('second-title')->required();
+        $validation->file('status 1')->required();
+        $validation->file('category')->label('cat gory')->required();
+
+        $valid = $validation->validate([], []);
+
+        $this->assertFalse($valid);
+
+        $this->assertEquals(
+            [
+                'name' => ['RequiredFile' => 'Name is required!'],
+                'main_title' => ['RequiredFile' => 'Main Title is required!'],
+                'second-title' => ['RequiredFile' => 'Second Title is required!'],
+                'status 1' => ['RequiredFile' => 'Status 1 is required!'],
+                'category' => ['RequiredFile' => 'Cat Gory is required!'],
+            ],
+            $validation->errors()->all()
+        );
     }
 }
