@@ -6,8 +6,6 @@ namespace Falgun\Validation\Rules;
 final class Email implements RuleInterface
 {
 
-    const NAME = 'Email';
-
     public function validate($value): bool
     {
         return (\filter_var($value, \FILTER_VALIDATE_EMAIL) !== false);
@@ -16,5 +14,10 @@ final class Email implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s should be an email address!';
+    }
+
+    public function getName(): string
+    {
+        return 'Email';
     }
 }

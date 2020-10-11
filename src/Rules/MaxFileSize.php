@@ -6,8 +6,6 @@ namespace Falgun\Validation\Rules;
 final class MaxFileSize implements RuleInterface
 {
 
-    const NAME = 'MaxFileSize';
-
     private int $maxSize;
 
     public function __construct(int $maxSize)
@@ -51,5 +49,10 @@ final class MaxFileSize implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s should be less than ' . $this->maxSize . ' bytes!';
+    }
+
+    public function getName(): string
+    {
+        return 'MaxFileSize';
     }
 }

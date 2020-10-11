@@ -6,8 +6,6 @@ namespace Falgun\Validation\Rules;
 final class Required implements RuleInterface
 {
 
-    const NAME = 'Required';
-
     public function validate($value): bool
     {
         return $value !== '';
@@ -16,5 +14,10 @@ final class Required implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s is required!';
+    }
+
+    public function getName(): string
+    {
+        return 'Required';
     }
 }

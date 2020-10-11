@@ -6,8 +6,6 @@ namespace Falgun\Validation\Rules;
 final class RequiredFile implements RuleInterface
 {
 
-    const NAME = 'RequiredFile';
-
     public function validate($value): bool
     {
         $file = \current($value);
@@ -27,5 +25,10 @@ final class RequiredFile implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s is required!';
+    }
+
+    public function getName(): string
+    {
+        return 'RequiredFile';
     }
 }

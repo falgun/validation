@@ -6,8 +6,6 @@ namespace Falgun\Validation\Rules;
 final class MinLen implements RuleInterface
 {
 
-    const NAME = 'Min';
-
     private int $min;
 
     public function __construct(int $min)
@@ -23,5 +21,10 @@ final class MinLen implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s should be atleast ' . $this->min . ' characters!';
+    }
+
+    public function getName(): string
+    {
+        return 'Min';
     }
 }

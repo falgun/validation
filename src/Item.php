@@ -155,7 +155,7 @@ final class Item implements ItemInterface
 
     protected function handleFailedRuleCase(RuleInterface $rule, ErrorBag $errorBag, ErrorFormatBag $errorFormats): void
     {
-        $ruleName = ($rule instanceof Custom) ? $rule->getName() : $rule::NAME;
+        $ruleName = $rule->getName();
         $format = $errorFormats->get($ruleName);
 
         if ($format === '') {

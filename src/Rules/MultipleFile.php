@@ -6,8 +6,6 @@ namespace Falgun\Validation\Rules;
 final class MultipleFile implements RuleInterface
 {
 
-    const NAME = 'MultipleFile';
-
     public function validate($value): bool
     {
         return \is_array(\current($value));
@@ -16,5 +14,10 @@ final class MultipleFile implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s should have multiple files!';
+    }
+
+    public function getName(): string
+    {
+        return 'MultipleFile';
     }
 }

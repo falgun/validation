@@ -6,8 +6,6 @@ namespace Falgun\Validation\Rules;
 final class MaxLen implements RuleInterface
 {
 
-    const NAME = 'Max';
-
     private int $limit;
 
     public function __construct(int $limit)
@@ -23,5 +21,10 @@ final class MaxLen implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s should be within ' . $this->limit . ' characters!';
+    }
+
+    public function getName(): string
+    {
+        return 'Max';
     }
 }

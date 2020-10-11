@@ -6,8 +6,6 @@ namespace Falgun\Validation\Rules;
 final class AlphaNum implements RuleInterface
 {
 
-    const NAME = 'AlphaNum';
-
     public function validate($value): bool
     {
         return \ctype_alnum($value);
@@ -16,5 +14,10 @@ final class AlphaNum implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s should only contain letters and numbers!';
+    }
+
+    public function getName(): string
+    {
+        return 'AlphaNum';
     }
 }

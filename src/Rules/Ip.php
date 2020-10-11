@@ -6,8 +6,6 @@ namespace Falgun\Validation\Rules;
 final class Ip implements RuleInterface
 {
 
-    const NAME = 'Ip';
-
     public function validate($value): bool
     {
         return (\filter_var($value, \FILTER_VALIDATE_IP) !== false);
@@ -16,5 +14,10 @@ final class Ip implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s should be an IP address!';
+    }
+
+    public function getName(): string
+    {
+        return 'Ip';
     }
 }

@@ -6,8 +6,6 @@ namespace Falgun\Validation\Rules;
 final class MatchWith implements RuleInterface
 {
 
-    const NAME = 'MatchWith';
-
     private $parentValue;
     private string $parentLabel;
 
@@ -36,5 +34,10 @@ final class MatchWith implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s should contain same value as ' . $this->parentLabel . '!';
+    }
+
+    public function getName(): string
+    {
+        return 'MatchWith';
     }
 }

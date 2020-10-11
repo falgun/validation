@@ -8,8 +8,6 @@ use const PATHINFO_EXTENSION;
 final class IsImage implements RuleInterface
 {
 
-    const NAME = 'IsImage';
-
     /**
      * @todo Bad implementation
      * @FIXIT
@@ -52,5 +50,10 @@ final class IsImage implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s should be an image file!';
+    }
+
+    public function getName(): string
+    {
+        return 'IsImage';
     }
 }

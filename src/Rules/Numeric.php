@@ -6,8 +6,6 @@ namespace Falgun\Validation\Rules;
 final class Numeric implements RuleInterface
 {
 
-    const NAME = 'Numeric';
-
     public function validate($value): bool
     {
         return \is_numeric($value);
@@ -16,5 +14,10 @@ final class Numeric implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s should be numeric!';
+    }
+
+    public function getName(): string
+    {
+        return 'Numeric';
     }
 }

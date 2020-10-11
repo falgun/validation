@@ -8,8 +8,6 @@ use Closure;
 final class Custom implements RuleInterface
 {
 
-    const NAME = 'Custom';
-
     private string $name;
     private Closure $customRule;
     private string $errorMessage;

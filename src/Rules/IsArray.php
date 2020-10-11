@@ -6,8 +6,6 @@ namespace Falgun\Validation\Rules;
 final class IsArray implements RuleInterface
 {
 
-    const NAME = 'IsArray';
-
     public function validate($value): bool
     {
         return \is_array($value);
@@ -16,5 +14,10 @@ final class IsArray implements RuleInterface
     public function getErrorMessage(): string
     {
         return '%s should be an array!';
+    }
+
+    public function getName(): string
+    {
+        return 'IsArray';
     }
 }
