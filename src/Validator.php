@@ -5,7 +5,7 @@ namespace Falgun\Validation;
 
 use Falgun\Notification\NotificationInterface;
 
-class Validator
+final class Validator
 {
 
     protected array $items;

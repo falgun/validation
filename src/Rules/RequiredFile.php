@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class RequiredFile implements RuleInterface
+final class RequiredFile implements RuleInterface
 {
 
     const NAME = 'RequiredFile';

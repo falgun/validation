@@ -9,7 +9,7 @@ use Falgun\Validation\Rules\Custom;
 use Falgun\Validation\ErrorFormatBag;
 use Falgun\Validation\Rules\RuleInterface;
 
-class FileItem implements ItemInterface
+final class FileItem implements ItemInterface
 {
 
     protected string $key;

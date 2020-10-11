@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class Numeric implements RuleInterface
+final class Numeric implements RuleInterface
 {
 
     const NAME = 'Numeric';

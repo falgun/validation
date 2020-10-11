@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class AlphaNum implements RuleInterface
+final class AlphaNum implements RuleInterface
 {
 
     const NAME = 'AlphaNum';

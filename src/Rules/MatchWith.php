@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class MatchWith implements RuleInterface
+final class MatchWith implements RuleInterface
 {
 
     const NAME = 'MatchWith';
 
-    protected $parentValue;
-    protected string $parentLabel;
+    private $parentValue;
+    private string $parentLabel;
 
     public function __construct(string $parentLabel)
     {

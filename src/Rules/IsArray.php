@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class IsArray implements RuleInterface
+final class IsArray implements RuleInterface
 {
 
     const NAME = 'IsArray';

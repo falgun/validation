@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class Ip implements RuleInterface
+final class Ip implements RuleInterface
 {
 
     const NAME = 'Ip';

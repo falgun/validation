@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class MaxFileSize implements RuleInterface
+final class MaxFileSize implements RuleInterface
 {
 
     const NAME = 'MaxFileSize';

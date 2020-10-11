@@ -5,7 +5,7 @@ namespace Falgun\Validation\Rules;
 
 use const PATHINFO_EXTENSION;
 
-class IsImage implements RuleInterface
+final class IsImage implements RuleInterface
 {
 
     const NAME = 'IsImage';

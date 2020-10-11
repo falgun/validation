@@ -17,7 +17,7 @@ use Falgun\Validation\Rules\Numeric;
 use Falgun\Validation\Rules\Required;
 use Falgun\Validation\Rules\RuleInterface;
 
-class Item implements ItemInterface
+final class Item implements ItemInterface
 {
 
     protected string $key;

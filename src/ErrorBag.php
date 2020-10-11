@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation;
 
-class ErrorBag implements \IteratorAggregate
+final class ErrorBag implements \IteratorAggregate
 {
 
     protected array $errors;

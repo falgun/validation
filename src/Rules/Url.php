@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class Url implements RuleInterface
+final class Url implements RuleInterface
 {
 
     const NAME = 'Url';

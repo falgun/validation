@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class MaxLen implements RuleInterface
+final class MaxLen implements RuleInterface
 {
 
     const NAME = 'Max';
 
-    protected int $limit;
+    private int $limit;
 
     public function __construct(int $limit)
     {

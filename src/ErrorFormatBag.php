@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation;
 
-class ErrorFormatBag
+final class ErrorFormatBag
 {
 
     protected array $errorFormats;

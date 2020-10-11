@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class MinLen implements RuleInterface
+final class MinLen implements RuleInterface
 {
 
     const NAME = 'Min';
 
-    protected int $min;
+    private int $min;
 
     public function __construct(int $min)
     {

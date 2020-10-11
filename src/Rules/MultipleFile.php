@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class MultipleFile implements RuleInterface
+final class MultipleFile implements RuleInterface
 {
 
     const NAME = 'MultipleFile';

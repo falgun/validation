@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Falgun\Validation\Rules;
 
-class Email implements RuleInterface
+final class Email implements RuleInterface
 {
 
     const NAME = 'Email';
