@@ -146,11 +146,11 @@ final class Item implements ItemInterface
         foreach ($this->rules as $rule) {
             if ($value === null || $rule->validate($value) === false) {
                 $this->handleFailedRuleCase($rule, $errorBag, $errorFormats);
-                $isPassed &= false;
+                $isPassed = false;
             }
         }
 
-        return ($isPassed & true) === 1;
+        return $isPassed;
     }
 
     protected function handleFailedRuleCase(RuleInterface $rule, ErrorBag $errorBag, ErrorFormatBag $errorFormats): void
