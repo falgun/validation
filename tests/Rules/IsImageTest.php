@@ -33,6 +33,33 @@ final class IsImageTest extends AbstractFileRuleTestHelper implements RuleTestIn
         $this->performTest($photo, ['photo' => ['IsImage' => 'Photo should be an image file!']]);
     }
 
+    public function testInvalidInMultipleData()
+    {
+        $this->validator->file('photo')->isImage();
+
+        $photo = ['photo' =>
+            [
+                [
+                    'name' => 'Screenshot_2020-09-05.png',
+                    'type' => 'image/png',
+                    'tmp_name' => '/tmp/php45TlTv',
+                    'size' => 21311,
+                    'error' => 0,
+                ],
+                $this->singleFile(),
+                [
+                    'name' => 'Screenshot_2020-09-05.jpeg',
+                    'type' => 'image/jpeg',
+                    'tmp_name' => '/tmp/php45TlTv',
+                    'size' => 21311,
+                    'error' => 0,
+                ],
+            ],
+        ];
+
+        $this->performTest($photo, ['photo' => ['IsImage' => 'Photo should be an image file!']]);
+    }
+
     public function testValidData()
     {
         $this->validator->file('photo')->isImage();
