@@ -10,15 +10,11 @@ class Numeric implements RuleInterface
 
     public function validate($value): bool
     {
-        if ($value === null) {
-            return false;
-        }
-
         return \is_numeric($value);
     }
 
     public function getErrorMessage(): string
     {
-        return '%s should be numeric !';
+        return '%s should be numeric!';
     }
 }

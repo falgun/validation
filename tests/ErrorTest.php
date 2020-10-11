@@ -25,8 +25,8 @@ final class ErrorTest extends TestCase
             [
                 'name' => [
                     'Required' => 'Name is required!',
-                    'Min' => 'Name should be more than 1 characters !',
-                    'Max' => 'Name should be less than 10 characters !',
+                    'Min' => 'Name should be atleast 1 characters!',
+                    'Max' => 'Name should be within 10 characters!',
                 ]
             ]
         );
@@ -50,7 +50,7 @@ final class ErrorTest extends TestCase
             } elseif ($item === 'email') {
                 $this->assertSame([
                     'Required' => 'Email is required!',
-                    'Email' => 'Email should be an email address !',
+                    'Email' => 'Email should be an email address!',
                     ], $error);
             } else {
                 $this->fail();
@@ -63,8 +63,8 @@ final class ErrorTest extends TestCase
         $errorBag = new ErrorFormatBag(
             [
             'Required' => '%s is (test) required!',
-            'Min' => '%s should be more (test) than 1 characters !',
-            'Max' => '%s should be less (test) than 10 characters !',
+            'Min' => '%s should be (test) atleast 1 characters!',
+            'Max' => '%s should be (test) within 10 characters!',
             ]
         );
         $validation = new Validator(null, $errorBag);
@@ -79,8 +79,8 @@ final class ErrorTest extends TestCase
             [
                 'name' => [
                     'Required' => 'Name is (test) required!',
-                    'Min' => 'Name should be more (test) than 1 characters !',
-                    'Max' => 'Name should be less (test) than 10 characters !',
+                    'Min' => 'Name should be (test) atleast 1 characters!',
+                    'Max' => 'Name should be (test) within 10 characters!',
                 ]
             ],
             $validation->errors()->all()

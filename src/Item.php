@@ -144,7 +144,7 @@ class Item implements ItemInterface
         $isPassed = true;
 
         foreach ($this->rules as $rule) {
-            if ($rule->validate($value) === false) {
+            if ($value === null || $rule->validate($value) === false) {
                 $this->handleFailedRuleCase($rule, $errorBag, $errorFormats);
                 $isPassed &= false;
             }

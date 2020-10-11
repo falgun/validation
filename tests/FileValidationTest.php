@@ -53,7 +53,6 @@ class FileValidationTest extends TestCase
 
     public function testOptionalFileValidation()
     {
-
         $validation = new Validator();
 
         $validation->file('file_1')->isImage();
@@ -63,6 +62,17 @@ class FileValidationTest extends TestCase
         $this->assertTrue($isValid, 'Optional File Validation Failed');
 
         $this->assertEquals([], $validation->errors()->all(), 'Optional File validation return errors');
+    }
+    
+    public function testNonExistentFileValidation()
+    {
+        $validation = new Validator();
+
+        $validation->file('file_1')->required();
+
+        $isValid = $validation->validate([], []);
+
+        $this->assertFalse($isValid, 'NonExistent File Validation Failed');
     }
 
     public function testImageFileValidation()
@@ -110,7 +120,7 @@ class FileValidationTest extends TestCase
 
         $this->assertFalse($isValid, 'Multiple File Validation Failed');
 
-        $this->assertEquals(['file_1' => ['MultipleFile' => 'File 1 should have multiple files !']],
+        $this->assertEquals(['file_1' => ['MultipleFile' => 'File 1 should have multiple files!']],
             $validation->errors()->all(),
             'Multiple File validation return errors');
     }

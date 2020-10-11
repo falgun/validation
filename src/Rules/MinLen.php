@@ -17,15 +17,11 @@ class MinLen implements RuleInterface
 
     public function validate($value): bool
     {
-        if ($value === null) {
-            return false;
-        }
-
         return strlen($value) >= $this->min;
     }
 
     public function getErrorMessage(): string
     {
-        return '%s should be more than ' . $this->min . ' characters !';
+        return '%s should be atleast ' . $this->min . ' characters!';
     }
 }

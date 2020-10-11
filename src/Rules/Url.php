@@ -10,15 +10,11 @@ class Url implements RuleInterface
 
     public function validate($value): bool
     {
-        if ($value === null) {
-            return false;
-        }
-
         return (\filter_var($value, \FILTER_VALIDATE_URL) !== false);
     }
 
     public function getErrorMessage(): string
     {
-        return '%s should be an url address !';
+        return '%s should be an url address!';
     }
 }

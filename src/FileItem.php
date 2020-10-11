@@ -83,7 +83,7 @@ class FileItem implements ItemInterface
         $isPassed = true;
 
         foreach ($this->rules as $rule) {
-            if ($rule->validate($value) === false) {
+            if (\is_array($value) === false || $rule->validate($value) === false) {
                 $this->handleFailedRuleCase($rule, $errorBag, $errorFormats);
                 $isPassed &= false;
             }

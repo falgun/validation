@@ -12,12 +12,13 @@ class Validator
     protected array $fileItems;
     protected ErrorBag $errorBag;
     protected ErrorFormatBag $errorFormats;
-    protected NotificationInterface $notification;
+    protected ?NotificationInterface $notification;
 
-    public function __construct(NotificationInterface $notification = null, $errorFormats = null)
+    public function __construct(NotificationInterface $notification = null, ErrorFormatBag $errorFormats = null)
     {
         $this->items = [];
         $this->fileItems = [];
+        $this->errorBag = new ErrorBag();
 
         if ($errorFormats === null) {
             $errorFormats = new ErrorFormatBag();
@@ -25,9 +26,7 @@ class Validator
 
         $this->errorFormats = $errorFormats;
 
-        if ($notification !== null) {
-            $this->notification = $notification;
-        }
+        $this->notification = $notification;
     }
 
     public function select(string $name): Item
@@ -42,6 +41,7 @@ class Validator
 
     public function validate(array $postDatas, array $files = []): bool
     {
+        // we want to reset error bag on each validation
         $this->errorBag = new ErrorBag();
 
         $postItemsPassed = $this->validateItems($this->items, $postDatas);
@@ -49,7 +49,7 @@ class Validator
 
         $isAllItemsPassed = $postItemsPassed && $fileItemsPassed;
 
-        if ($isAllItemsPassed === false && isset($this->notification)) {
+        if ($isAllItemsPassed === false) {
             $this->setToNofication($this->errorBag);
         }
 
@@ -80,6 +80,10 @@ class Validator
 
     protected function setToNofication(ErrorBag $errorBag): void
     {
+        if (isset($this->notification) === false) {
+            return;
+        }
+
         foreach ($errorBag as $errors) {
             foreach ($errors as $error) {
                 $this->notification->warningNote($error);

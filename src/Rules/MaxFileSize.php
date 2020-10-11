@@ -17,10 +17,6 @@ class MaxFileSize implements RuleInterface
 
     public function validate($value): bool
     {
-        if (\is_array($value) === false) {
-            return false;
-        }
-
         if (\is_array(\current($value))) {
             // multiple file
             return $this->validateArrayFiles($value);
@@ -39,9 +35,9 @@ class MaxFileSize implements RuleInterface
         return ($isPassed & true) === 1;
     }
 
-    private function checkFileSize($value): bool
+    private function checkFileSize(array $value): bool
     {
-        if (isset($value['error']) && $value['error'] === 4) {
+        if (isset($value['error']) && $value['error'] === \UPLOAD_ERR_NO_FILE) {
             return true;
         }
 
@@ -49,7 +45,7 @@ class MaxFileSize implements RuleInterface
             return false;
         }
 
-        return $value['size'] < $this->maxSize;
+        return $value['size'] <= $this->maxSize;
     }
 
     public function getErrorMessage(): string

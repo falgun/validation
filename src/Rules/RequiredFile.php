@@ -10,10 +10,6 @@ class RequiredFile implements RuleInterface
 
     public function validate($value): bool
     {
-        if (\is_array($value) === false) {
-            return false;
-        }
-
         $file = \current($value);
         if (\is_array($file)) {
             // multiple file
@@ -23,9 +19,9 @@ class RequiredFile implements RuleInterface
         return $this->hasNoError($value);
     }
 
-    private function hasNoError($file): bool
+    private function hasNoError(array $file): bool
     {
-        return (isset($file['error']) && $file['error'] === 0);
+        return (isset($file['error']) && $file['error'] !== \UPLOAD_ERR_NO_FILE);
     }
 
     public function getErrorMessage(): string

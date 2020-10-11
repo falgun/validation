@@ -10,15 +10,11 @@ class Email implements RuleInterface
 
     public function validate($value): bool
     {
-        if ($value === null) {
-            return false;
-        }
-
         return (\filter_var($value, \FILTER_VALIDATE_EMAIL) !== false);
     }
 
     public function getErrorMessage(): string
     {
-        return '%s should be an email address !';
+        return '%s should be an email address!';
     }
 }

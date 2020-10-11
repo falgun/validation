@@ -10,15 +10,11 @@ class MultipleFile implements RuleInterface
 
     public function validate($value): bool
     {
-        if (\is_array($value) === false) {
-            return false;
-        }
-
         return \is_array(\current($value));
     }
 
     public function getErrorMessage(): string
     {
-        return '%s should have multiple files !';
+        return '%s should have multiple files!';
     }
 }

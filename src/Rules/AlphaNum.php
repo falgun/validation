@@ -10,15 +10,11 @@ class AlphaNum implements RuleInterface
 
     public function validate($value): bool
     {
-        if ($value === null) {
-            return false;
-        }
-
         return \ctype_alnum($value);
     }
 
     public function getErrorMessage(): string
     {
-        return '%s should only contain letters and numbers !';
+        return '%s should only contain letters and numbers!';
     }
 }

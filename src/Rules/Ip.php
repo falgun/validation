@@ -10,15 +10,11 @@ class Ip implements RuleInterface
 
     public function validate($value): bool
     {
-        if ($value === null) {
-            return false;
-        }
-
         return (\filter_var($value, \FILTER_VALIDATE_IP) !== false);
     }
 
     public function getErrorMessage(): string
     {
-        return '%s should be an IP address !';
+        return '%s should be an IP address!';
     }
 }

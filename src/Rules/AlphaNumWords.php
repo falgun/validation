@@ -10,15 +10,11 @@ class AlphaNumWords implements RuleInterface
 
     public function validate($value): bool
     {
-        if ($value === null) {
-            return false;
-        }
-
         return \preg_match('/[^a-zA-Z0-9\ ]/', $value) !== 1;
     }
 
     public function getErrorMessage(): string
     {
-        return '%s should only contain letters, numbers and spaces !';
+        return '%s should only contain letters, numbers and spaces!';
     }
 }

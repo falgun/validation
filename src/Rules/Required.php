@@ -10,7 +10,7 @@ class Required implements RuleInterface
 
     public function validate($value): bool
     {
-        return $value !== null && $value !== '';
+        return $value !== '';
     }
 
     public function getErrorMessage(): string

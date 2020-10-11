@@ -60,7 +60,6 @@ final class FileRuleTest extends TestCase
         $this->assertEquals(
             ['file_1' =>
                 [
-                    'RequiredFile' => 'File 1 is required!',
                     'custom' => 'File 1 is invalid!',
                 ]
             ],

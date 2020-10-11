@@ -17,15 +17,11 @@ class MaxLen implements RuleInterface
 
     public function validate($value): bool
     {
-        if ($value === null) {
-            return false;
-        }
-
         return strlen($value) <= $this->limit;
     }
 
     public function getErrorMessage(): string
     {
-        return '%s should be less than ' . $this->limit . ' characters !';
+        return '%s should be within ' . $this->limit . ' characters!';
     }
 }

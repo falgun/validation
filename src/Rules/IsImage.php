@@ -16,10 +16,6 @@ class IsImage implements RuleInterface
      */
     public function validate($value): bool
     {
-        if (\is_array($value) === false) {
-            return false;
-        }
-
         if (\is_array(\current($value))) {
             // multiple file
             return $this->validateArrayFiles($value);
@@ -38,7 +34,7 @@ class IsImage implements RuleInterface
         return ($isAllImage & true) === 1;
     }
 
-    private function checkImageExtension($value): bool
+    private function checkImageExtension(array $value): bool
     {
         if (isset($value['error']) && $value['error'] === 4) {
             return true;

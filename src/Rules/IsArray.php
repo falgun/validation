@@ -10,15 +10,11 @@ class IsArray implements RuleInterface
 
     public function validate($value): bool
     {
-        if ($value === null) {
-            return false;
-        }
-
         return \is_array($value);
     }
 
     public function getErrorMessage(): string
     {
-        return '%s should be an array !';
+        return '%s should be an array!';
     }
 }
